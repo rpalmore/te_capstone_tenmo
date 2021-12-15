@@ -9,9 +9,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.security.Principal;
 
 @RestController
-//@PreAuthorize("isAuthenticated()")
+@PreAuthorize("isAuthenticated()")
 public class TenmoController {
 
     @Autowired
@@ -19,13 +20,18 @@ public class TenmoController {
 
     @Autowired
     private UserDao userDao;
+    //TenmoService tenmoService;
 
 
+@RequestMapping(path= "/balance",method = RequestMethod.GET)
+    public Account getAccount(Principal principal){
 
-@RequestMapping(path= "/account/{id}", method= RequestMethod.GET)
-    public Account getAccount(@PathVariable int id){
-
+    int id= userDao.findIdByUsername(principal.getName());
     return accountDao.getAccount(id);
-}
 
+}
+    /*@GetMapping("/balance")
+    public Account getBalance(){
+   // return tenmoService.getBalance();
+    }*/
 }

@@ -20,16 +20,16 @@ public class TenmoService {
         this.authToken = authToken;
     }
 
-    public Account getBalance(int id){
+    public Account getBalance(){
         Account account = null;
-       ResponseEntity<Account> response = restTemplate.exchange(baseUrl + "account/" + id,
+       ResponseEntity<Account> response = restTemplate.exchange(baseUrl + "balance",
                HttpMethod.GET , makeAuthEntity(), Account.class);
        account = response.getBody();
        return account;
 
     }
 
-//helper method
+    //helper method
     public HttpEntity<Void> makeAuthEntity(){
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(authToken);

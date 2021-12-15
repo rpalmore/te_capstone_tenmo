@@ -74,7 +74,7 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 	private void viewCurrentBalance() {
 		// TODO Auto-generated method stub
 		TenmoService tenmoService = new TenmoService(API_BASE_URL, currentUser.getToken());
-		Account account = tenmoService.getBalance(currentUser.getUser().getId());
+		Account account = tenmoService.getBalance();
 		UserOutput.displayAccountBalance(account);
 	}
 

@@ -30,11 +30,12 @@ public class JdbcAccountDao implements  AccountDao{
         }
                 return account;
     }
+    // principal principal
 
     private Account mapRowToAccount(SqlRowSet rs){
         Account account = new Account();
         account.setAccountId(rs.getInt("account_id"));
-        account.setAccountId(rs.getInt("user_id"));
+        account.setUserId(rs.getInt("user_id"));
         account.setBalance(rs.getBigDecimal("balance"));
         return account;
     }
