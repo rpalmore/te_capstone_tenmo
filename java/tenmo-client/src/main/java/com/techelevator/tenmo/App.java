@@ -2,6 +2,7 @@ package com.techelevator.tenmo;
 
 import com.techelevator.tenmo.model.Account;
 import com.techelevator.tenmo.model.AuthenticatedUser;
+import com.techelevator.tenmo.model.User;
 import com.techelevator.tenmo.model.UserCredentials;
 import com.techelevator.tenmo.services.AuthenticationService;
 import com.techelevator.tenmo.services.AuthenticationServiceException;
@@ -59,7 +60,8 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 			} else if(MAIN_MENU_OPTION_VIEW_PENDING_REQUESTS.equals(choice)) {
 				viewPendingRequests();
 			} else if(MAIN_MENU_OPTION_SEND_BUCKS.equals(choice)) {
-				sendBucks();
+				//sendBucks();
+				viewUsers();
 			} else if(MAIN_MENU_OPTION_REQUEST_BUCKS.equals(choice)) {
 				requestBucks();
 			} else if(MAIN_MENU_OPTION_LOGIN.equals(choice)) {
@@ -76,6 +78,12 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 		TenmoService tenmoService = new TenmoService(API_BASE_URL, currentUser.getToken());
 		Account account = tenmoService.getBalance();
 		UserOutput.displayAccountBalance(account);
+	}
+
+	private void viewUsers() {
+		TenmoService tenmoService = new TenmoService(API_BASE_URL, currentUser.getToken());
+		User[] users = tenmoService.getUserIdAndName();
+		UserOutput.displayAllUsers(users);
 	}
 
 	private void viewTransferHistory() {

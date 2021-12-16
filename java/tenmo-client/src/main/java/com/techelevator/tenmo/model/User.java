@@ -1,9 +1,12 @@
 package com.techelevator.tenmo.model;
 
+import java.math.BigDecimal;
+
 public class User {
 
 	private Integer id;
 	private String username;
+
 
 	public Integer getId() {
 		return id;
@@ -19,5 +22,13 @@ public class User {
 	
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", username='" + username + '\'' +
+				'}';
 	}
 }

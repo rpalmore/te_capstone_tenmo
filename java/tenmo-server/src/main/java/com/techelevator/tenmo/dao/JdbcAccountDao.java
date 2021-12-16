@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 public class JdbcAccountDao implements  AccountDao{
 
     private JdbcTemplate jdbcTemplate;
-    //JdbcUserDao jdbcUserDao = new JdbcUserDao();
 
     public JdbcAccountDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -21,7 +20,7 @@ public class JdbcAccountDao implements  AccountDao{
     @Override
     public Account getAccount(int id) {
 
-        String sql = "SELECT account_id, user_id, balance FROM accounts WHERE user_id = ?;";
+        String sql = "SELECT account_id, user_id, balance FROM accounts WHERE user_id = ?";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
         Account account = new Account();
@@ -30,7 +29,6 @@ public class JdbcAccountDao implements  AccountDao{
         }
                 return account;
     }
-    // principal principal
 
     private Account mapRowToAccount(SqlRowSet rs){
         Account account = new Account();
