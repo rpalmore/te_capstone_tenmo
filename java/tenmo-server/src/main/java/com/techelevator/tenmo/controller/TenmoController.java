@@ -3,6 +3,7 @@ package com.techelevator.tenmo.controller;
 import com.techelevator.tenmo.dao.AccountDao;
 import com.techelevator.tenmo.dao.UserDao;
 import com.techelevator.tenmo.model.Account;
+import com.techelevator.tenmo.model.TransferDTO;
 import com.techelevator.tenmo.model.User;
 import com.techelevator.tenmo.services.TenmoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,12 @@ public class TenmoController {
     return userDao.findIdAndName();
   }
 
+  @RequestMapping(path = "/transfer", method = RequestMethod.POST)
+    public TransferDTO transfer(@RequestBody TransferDTO transferDTO){
+      System.out.println("In transfer"+ transferDTO);
+    return null;
+
+
+  }
 
 }

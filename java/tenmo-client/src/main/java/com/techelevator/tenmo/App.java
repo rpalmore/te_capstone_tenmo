@@ -103,12 +103,10 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 		//collectUserTransferDetails();
 		// collecting user input of: userFromId, userToId, amount >> TransferDTO model
 		TransferDTO transferDTO = collectUserTransferDetails();
-		//authenticationService.register(credentials);
-
-		//tenmoService.transferDTORequest();
+		tenmoService.transferDTORequest(transferDTO);
 
 		//tenmoService.transferDTORequest(TransferDTO transferDTO);
-		System.out.println("Test");
+
 	}
 
 	private void requestBucks() {
@@ -177,7 +175,7 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 	}
 
 	private TransferDTO collectUserTransferDetails() {
-		Long userFromId = console.getUserInputLong("User from ID");
+		Long userFromId = (long)currentUser.getUser().getId();
 		Long userToId = console.getUserInputLong("User to Id");
 		BigDecimal amount = console.getUserInputBigDecimal("Amount to transfer: ");
 		//BigDecimal amount = BigDecimal.valueOf(console.getUserInputInteger("Amount to transfer"));

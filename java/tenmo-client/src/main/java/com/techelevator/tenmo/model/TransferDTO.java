@@ -5,12 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 
 public class TransferDTO {
-    //@JsonProperty ??
+
     private long userFromId;
     private long userToId;
     private BigDecimal amount;
-    // private String transfer_type;
-    // private String transfer_status;
+
 
 
     public TransferDTO(long userFromId, long userToId, BigDecimal amount) {

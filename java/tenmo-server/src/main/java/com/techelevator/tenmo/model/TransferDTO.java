@@ -7,8 +7,7 @@ public class TransferDTO {
         private Long userFromId;
         private long userToId;
         private BigDecimal amount;
-        // private String transfer_type;
-        // private String transfer_status;
+
 
         public Long getUserFromId() {
                 return userFromId;
