@@ -105,7 +105,7 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 		TransferDTO transferDTO = collectUserTransferDetails();
 		//authenticationService.register(credentials);
 
-		tenmoService.transferDTORequest();
+		//tenmoService.transferDTORequest();
 
 		//tenmoService.transferDTORequest(TransferDTO transferDTO);
 		System.out.println("Test");

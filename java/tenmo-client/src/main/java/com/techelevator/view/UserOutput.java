@@ -10,8 +10,8 @@ public class UserOutput {
     }
 
     public static void displayAllUsers(User[] user){
-            for (User eachuser : user) {
-                System.out.println(eachuser.toString());
+            for (User eachUser : user) {
+                System.out.println(eachUser.toString());
             }
         System.out.println();
         System.out.println("Enter ID of the user you wish to send money to: ");
