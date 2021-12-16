@@ -14,13 +14,8 @@ public class UserOutput {
                 System.out.println(eachuser.toString());
             }
         System.out.println();
-        System.out.println("Enter ID of the user you are sending money to: ");
+        System.out.println("Enter ID of the user you wish to send money to: ");
         }
 }
 
-    /*public void printReviews(Review[] reviews) {
-        for (Review review : reviews) {
-            System.out.println(review.toString());
-        }
-    }*/
 

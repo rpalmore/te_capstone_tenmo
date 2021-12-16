@@ -1,14 +1,14 @@
 package com.techelevator.tenmo;
 
-import com.techelevator.tenmo.model.Account;
-import com.techelevator.tenmo.model.AuthenticatedUser;
-import com.techelevator.tenmo.model.User;
-import com.techelevator.tenmo.model.UserCredentials;
+import com.techelevator.tenmo.model.*;
 import com.techelevator.tenmo.services.AuthenticationService;
 import com.techelevator.tenmo.services.AuthenticationServiceException;
 import com.techelevator.tenmo.services.TenmoService;
 import com.techelevator.view.ConsoleService;
 import com.techelevator.view.UserOutput;
+
+import java.math.BigDecimal;
+
 
 public class App {
 
@@ -60,8 +60,7 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 			} else if(MAIN_MENU_OPTION_VIEW_PENDING_REQUESTS.equals(choice)) {
 				viewPendingRequests();
 			} else if(MAIN_MENU_OPTION_SEND_BUCKS.equals(choice)) {
-				//sendBucks();
-				viewUsers();
+				sendBucks();
 			} else if(MAIN_MENU_OPTION_REQUEST_BUCKS.equals(choice)) {
 				requestBucks();
 			} else if(MAIN_MENU_OPTION_LOGIN.equals(choice)) {
@@ -80,10 +79,11 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 		UserOutput.displayAccountBalance(account);
 	}
 
-	private void viewUsers() {
+	private void viewUsers() { // this is the first step in our Send TE Bucks process
 		TenmoService tenmoService = new TenmoService(API_BASE_URL, currentUser.getToken());
 		User[] users = tenmoService.getUserIdAndName();
 		UserOutput.displayAllUsers(users);
+		//pause();
 	}
 
 	private void viewTransferHistory() {
@@ -98,6 +98,10 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 
 	private void sendBucks() {
 		// TODO Auto-generated method stub
+		viewUsers();
+		collectUserTransferDetails();
+		// collecting user input of: userFromId, userToId, amount >> TransferDTO model
+
 		
 	}
 
@@ -164,5 +168,13 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 		String username = console.getUserInput("Username");
 		String password = console.getUserInput("Password");
 		return new UserCredentials(username, password);
+	}
+
+	private TransferDTO collectUserTransferDetails() {
+		Long userFromId = console.getUserInputLong("User from ID");
+		Long userToId = console.getUserInputLong("User to Id");
+		BigDecimal amount = console.getUserInputBigDecimal("Amount to transfer: ");
+		//BigDecimal amount = BigDecimal.valueOf(console.getUserInputInteger("Amount to transfer"));
+		return new TransferDTO(userFromId, userToId, amount);
 	}
 }

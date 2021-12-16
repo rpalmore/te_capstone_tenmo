@@ -38,6 +38,7 @@ public class TenmoService {
         return user;
     }
 
+    // Example code:
   /*  public Review[] listReviews() {
         return restTemplate.getForObject(API_BASE_URL + "reviews", Review[].class);
     }
