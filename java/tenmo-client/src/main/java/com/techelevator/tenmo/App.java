@@ -98,11 +98,17 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 
 	private void sendBucks() {
 		// TODO Auto-generated method stub
+		TenmoService tenmoService =new TenmoService(API_BASE_URL, currentUser.getToken());
 		viewUsers();
-		collectUserTransferDetails();
+		//collectUserTransferDetails();
 		// collecting user input of: userFromId, userToId, amount >> TransferDTO model
+		TransferDTO transferDTO = collectUserTransferDetails();
+		//authenticationService.register(credentials);
 
-		
+		tenmoService.transferDTORequest();
+
+		//tenmoService.transferDTORequest(TransferDTO transferDTO);
+		System.out.println("Test");
 	}
 
 	private void requestBucks() {

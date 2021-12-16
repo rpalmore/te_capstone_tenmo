@@ -1,9 +1,11 @@
 package com.techelevator.tenmo.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
 
 public class TransferDTO {
-
+    //@JsonProperty ??
     private long userFromId;
     private long userToId;
     private BigDecimal amount;

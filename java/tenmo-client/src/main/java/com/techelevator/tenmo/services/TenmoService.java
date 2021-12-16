@@ -2,12 +2,16 @@ package com.techelevator.tenmo.services;
 
 
 import com.techelevator.tenmo.model.Account;
+import com.techelevator.tenmo.model.TransferDTO;
 import com.techelevator.tenmo.model.User;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+
+import java.math.BigDecimal;
+import java.util.Map;
 
 
 public class TenmoService {
@@ -38,6 +42,16 @@ public class TenmoService {
         return user;
     }
 
+    public TransferDTO transferDTORequest(Long userFromId,Long userToId,BigDecimal amount){
+        TransferDTO transferDTO = null;
+         transferDTO= restTemplate.postForObject(baseUrl+ "transfer",
+                HttpMethod.POST,TransferDTO.class);
+        //transferDTO = response.getBody();
+
+        return transferDTO;
+
+
+    }
     // Example code:
   /*  public Review[] listReviews() {
         return restTemplate.getForObject(API_BASE_URL + "reviews", Review[].class);
@@ -50,6 +64,8 @@ public class TenmoService {
     public Review[] getReviewsByHotelId(int hotelID) {
         return restTemplate.getForObject(API_BASE_URL + "hotels/" + hotelID + "/reviews", Review[].class);
 */
+
+
         //helper method
     public HttpEntity<Void> makeAuthEntity(){
         HttpHeaders headers = new HttpHeaders();
