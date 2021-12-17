@@ -104,7 +104,8 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 		// collecting user input of: userFromId, userToId, amount >> TransferDTO model
 		TransferDTO transferDTO = collectUserTransferDetails();
 		tenmoService.transferDTORequest(transferDTO);
-
+		// some additional tenmoService method
+		tenmoService.processDTORequest(transferDTO);
 		//tenmoService.transferDTORequest(TransferDTO transferDTO);
 
 	}

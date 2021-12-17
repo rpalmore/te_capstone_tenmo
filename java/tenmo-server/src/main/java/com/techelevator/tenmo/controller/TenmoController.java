@@ -43,14 +43,13 @@ public class TenmoController {
   @RequestMapping(path = "/transfer", method = RequestMethod.POST)
     public TransferDTO transfer(@RequestBody TransferDTO transferDTO){
       System.out.println("In transfer " + transferDTO);
-      //JdbcTransferDao.createTransfer(); Where do we call the createTransfer() method?
     return null;
   }
 
   // trying to add a put method to update all balances if conditions are OK to proceed
     @RequestMapping(path = "/transfer", method = RequestMethod.PUT)
     public TransferDTO processTransfer(@RequestBody TransferDTO transferDTO){
-        System.out.println("Here we are!!!");
+        System.out.println(transferDTO);
         return transferDao.createTransfer(transferDTO);
     }
 

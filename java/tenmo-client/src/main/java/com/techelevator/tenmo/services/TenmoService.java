@@ -50,8 +50,16 @@ public class TenmoService {
          transferDTO= restTemplate.postForObject(baseUrl+ "transfer",
                 entity,TransferDTO.class);
         return transferDTO;
+    }
 
+    public TransferDTO processDTORequest(TransferDTO transferDTO){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(authToken);
 
+        HttpEntity<TransferDTO> entity = new HttpEntity<>(transferDTO, headers);
+        restTemplate.put(baseUrl + "transfer", entity, TransferDTO.class);
+
+        return transferDTO;
     }
     // Example code:
   /*  public Review[] listReviews() {
