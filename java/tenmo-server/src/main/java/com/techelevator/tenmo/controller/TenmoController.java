@@ -1,6 +1,7 @@
 package com.techelevator.tenmo.controller;
 
 import com.techelevator.tenmo.dao.AccountDao;
+import com.techelevator.tenmo.dao.JdbcTransferDao;
 import com.techelevator.tenmo.dao.UserDao;
 import com.techelevator.tenmo.model.Account;
 import com.techelevator.tenmo.model.TransferDTO;
@@ -40,8 +41,6 @@ public class TenmoController {
     public TransferDTO transfer(@RequestBody TransferDTO transferDTO){
       System.out.println("In transfer"+ transferDTO);
     return null;
-
-
   }
 
 }

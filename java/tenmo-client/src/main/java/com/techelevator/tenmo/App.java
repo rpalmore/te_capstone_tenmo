@@ -176,9 +176,8 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 
 	private TransferDTO collectUserTransferDetails() {
 		Long userFromId = (long)currentUser.getUser().getId();
-		Long userToId = console.getUserInputLong("User to Id");
-		BigDecimal amount = console.getUserInputBigDecimal("Amount to transfer: ");
-		//BigDecimal amount = BigDecimal.valueOf(console.getUserInputInteger("Amount to transfer"));
+		Long userToId = console.getUserInputLong("User ID");
+		BigDecimal amount = console.getUserInputBigDecimal("Amount to transfer");
 		return new TransferDTO(userFromId, userToId, amount);
 	}
 }

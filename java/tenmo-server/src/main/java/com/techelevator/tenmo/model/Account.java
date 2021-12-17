@@ -6,9 +6,7 @@ import java.math.BigDecimal;
 
 public class Account {
 
-    //@JsonProperty("account_id")
     private long accountId;
-    //@JsonProperty("user_id")
     private long userId;
     private BigDecimal balance;
 
