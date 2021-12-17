@@ -39,7 +39,7 @@ public class TenmoController {
 
   @RequestMapping(path = "/transfer", method = RequestMethod.POST)
     public TransferDTO transfer(@RequestBody TransferDTO transferDTO){
-      System.out.println("In transfer"+ transferDTO);
+      System.out.println("In transfer " + transferDTO);
     return null;
   }
 

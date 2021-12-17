@@ -20,7 +20,7 @@ public class JdbcTransferDao implements TransferDao{
     private UserDao userDao;
 
     @Override
-    public  TransferDTO createTransfer(TransferDTO transferDTO) {
+    public TransferDTO createTransfer(TransferDTO transferDTO) {
 
          String sql = "SELECT balance FROM accounts WHERE user_id = ?";
 
