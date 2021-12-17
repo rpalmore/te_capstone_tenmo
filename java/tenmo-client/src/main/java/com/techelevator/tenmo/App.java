@@ -88,7 +88,9 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 
 	private void viewTransferHistory() {
 		// TODO Auto-generated method stub
-		
+		TenmoService tenmoService = new TenmoService(API_BASE_URL, currentUser.getToken());
+		Transfer[] transfers = tenmoService.viewTransferHistory();
+		UserOutput.displayTransferHistory(transfers);
 	}
 
 	private void viewPendingRequests() {

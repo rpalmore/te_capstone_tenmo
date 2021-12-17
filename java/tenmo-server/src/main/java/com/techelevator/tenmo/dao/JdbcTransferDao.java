@@ -1,12 +1,18 @@
 package com.techelevator.tenmo.dao;
 
+import com.techelevator.tenmo.model.Account;
+import com.techelevator.tenmo.model.Transfer;
 import com.techelevator.tenmo.model.TransferDTO;
+import com.techelevator.tenmo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class JdbcTransferDao implements TransferDao{
@@ -20,10 +26,10 @@ public class JdbcTransferDao implements TransferDao{
     // Here, we don't need a default constructor.
 
 /* @Autowired
-    private AccountDao accountDao;
+    private AccountDao accountDao;*/
 
     @Autowired
-    private UserDao userDao;*/
+    private UserDao userDao;
 
     /*@Autowired
     private TransferDao transferDao;*/
@@ -80,6 +86,50 @@ public class JdbcTransferDao implements TransferDao{
         return transferDTO;
 }
 
+        /*public List<Transfer> getTransferHistory(){
+        List<Transfer> transfers = new ArrayList<>();
+        String sql = "SELECT transfer_id, username AS From, amount FROM transfers " +
+                "JOIN accounts ON transfers.account_from = accounts.account_id " +
+                "JOIN users ON accounts.user_id = users.user_id " +
+                "WHERE account_to = (SELECT account_id FROM accounts WHERE user_id = 1001)";
+        SqlRowSet results= jdbcTemplate.queryForRowSet(sql);
+        while(results.next()){
+            Transfer transfer = mapRowToTransferHistoryList(results);
+            transfers.add(transfer);
+        }
+                return transfers;
+    }*/
+
+
+    public List<Transfer> getTransferHistory(){
+        List<Transfer> transfers = new ArrayList<>();
+        //FROM SOMEONE TO BOB
+        String sql = "SELECT transfer_id, username, amount FROM transfers " +
+                "JOIN accounts ON transfers.account_from = accounts.account_id " +
+                "JOIN users ON accounts.user_id = users.user_id " +
+                "WHERE account_to = (SELECT account_id FROM accounts WHERE user_id = 1001)";
+        SqlRowSet results= jdbcTemplate.queryForRowSet(sql);
+
+        while(results.next()){
+            Transfer transfer = mapRowToTransferHistoryList(results);
+            transfers.add(transfer);
+        }
+        //FROM BOB to SOMEONE ELSE TO DO
+        String sql2 = "SELECT transfer_id, username, amount FROM transfers " +
+                "JOIN accounts ON transfers.account_from = accounts.account_id " +
+                "JOIN users ON accounts.user_id = users.user_id " +
+                "WHERE account_to = (SELECT account_id FROM accounts WHERE user_id = 1001)";
+        SqlRowSet results2= jdbcTemplate.queryForRowSet(sql2);
+
+        while(results2.next()){
+            Transfer transfer = mapRowToTransferHistoryList(results2);
+            transfers.add(transfer);
+        }
+        return transfers;
+    }
+
+
+
 
        private TransferDTO mapRowToTransfer(SqlRowSet rs){
         TransferDTO transferDTO = new TransferDTO();
@@ -88,6 +138,14 @@ public class JdbcTransferDao implements TransferDao{
         transferDTO.setAmount(rs.getBigDecimal("amount"));
         return transferDTO;
     }
+
+        private Transfer mapRowToTransferHistoryList(SqlRowSet rs){
+        Transfer transfer = new Transfer();
+        transfer.setTransferId(rs.getInt("transfer_id"));
+        transfer.setUsername(rs.getString("username"));
+        transfer.setAmount(rs.getBigDecimal("amount"));
+        return transfer;
+        }
 
 }
 

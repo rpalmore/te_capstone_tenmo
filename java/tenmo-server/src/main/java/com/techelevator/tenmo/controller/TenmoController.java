@@ -4,6 +4,7 @@ import com.techelevator.tenmo.dao.AccountDao;
 import com.techelevator.tenmo.dao.TransferDao;
 import com.techelevator.tenmo.dao.UserDao;
 import com.techelevator.tenmo.model.Account;
+import com.techelevator.tenmo.model.Transfer;
 import com.techelevator.tenmo.model.TransferDTO;
 import com.techelevator.tenmo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,7 @@ public class TenmoController {
     return userDao.findIdAndName();
   }
 
+
   // this gets the transfer amount and userTo from the client so we can handle on the server
   @RequestMapping(path = "/transfer", method = RequestMethod.POST)
     public TransferDTO transfer(@RequestBody TransferDTO transferDTO){
@@ -53,6 +55,11 @@ public class TenmoController {
         return transferDao.createTransfer(transferDTO);
     }
 
+    //view Transfer History
+    @RequestMapping(path = "/transfer", method = RequestMethod.GET)
+    public List<Transfer> getTransferHistory(){
+         return transferDao.getTransferHistory();
+    }
 
 
 }

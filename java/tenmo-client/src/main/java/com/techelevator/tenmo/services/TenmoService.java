@@ -2,6 +2,7 @@ package com.techelevator.tenmo.services;
 
 
 import com.techelevator.tenmo.model.Account;
+import com.techelevator.tenmo.model.Transfer;
 import com.techelevator.tenmo.model.TransferDTO;
 import com.techelevator.tenmo.model.User;
 import org.springframework.http.HttpEntity;
@@ -41,6 +42,18 @@ public class TenmoService {
         user = response.getBody();
         return user;
     }
+    //View  transfer History
+    public Transfer[] viewTransferHistory(){
+       Transfer[] transfer = null;
+        ResponseEntity<Transfer[]> response = restTemplate.exchange(baseUrl + "transfer",
+                HttpMethod.GET, makeAuthEntity(), Transfer[].class);
+        transfer = response.getBody();
+        return transfer;
+    }
+
+
+
+
 
     public TransferDTO transferDTORequest(TransferDTO transferDTO){
         HttpHeaders headers = new HttpHeaders();
