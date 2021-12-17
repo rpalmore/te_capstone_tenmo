@@ -7,24 +7,24 @@ import java.math.BigDecimal;
 public class Account {
 
     //@JsonProperty("account_id")
-    private int accountId;
+    private long accountId;
     //@JsonProperty("user_id")
-    private int userId;
+    private long userId;
     private BigDecimal balance;
 
-    public int getAccountId() {
+    public long getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(int accountId) {
+    public void setAccountId(long accountId) {
         this.accountId = accountId;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 

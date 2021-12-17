@@ -18,7 +18,7 @@ public class JdbcAccountDao implements  AccountDao{
 
 
     @Override
-    public Account getAccount(int id) {
+    public Account getAccount(long id) {
 
         String sql = "SELECT account_id, user_id, balance FROM accounts WHERE user_id = ?";
 
@@ -27,6 +27,7 @@ public class JdbcAccountDao implements  AccountDao{
         while(results.next()){
             account = mapRowToAccount(results);
         }
+
                 return account;
     }
 

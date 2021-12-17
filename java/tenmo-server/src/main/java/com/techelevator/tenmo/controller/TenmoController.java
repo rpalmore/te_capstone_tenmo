@@ -26,7 +26,7 @@ public class TenmoController {
 
 @RequestMapping(path = "/balance", method = RequestMethod.GET)
     public Account getAccount(Principal principal){
-    int id = userDao.findIdByUsername(principal.getName());
+    long id = userDao.findIdByUsername(principal.getName());
     return accountDao.getAccount(id);
   }
 
