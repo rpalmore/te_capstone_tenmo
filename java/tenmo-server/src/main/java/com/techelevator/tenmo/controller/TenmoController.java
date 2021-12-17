@@ -1,17 +1,15 @@
 package com.techelevator.tenmo.controller;
 
 import com.techelevator.tenmo.dao.AccountDao;
-import com.techelevator.tenmo.dao.JdbcTransferDao;
+import com.techelevator.tenmo.dao.TransferDao;
 import com.techelevator.tenmo.dao.UserDao;
 import com.techelevator.tenmo.model.Account;
 import com.techelevator.tenmo.model.TransferDTO;
 import com.techelevator.tenmo.model.User;
-import com.techelevator.tenmo.services.TenmoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 
@@ -25,6 +23,9 @@ public class TenmoController {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private TransferDao transferDao;
+
 @RequestMapping(path = "/balance", method = RequestMethod.GET)
     public Account getAccount(Principal principal){
     long id = userDao.findIdByUsername(principal.getName());
@@ -34,13 +35,25 @@ public class TenmoController {
   @RequestMapping(path = "/users", method = RequestMethod.GET)
     public List<User> getUserIdAndName(){
     // TO DO: limit results to users not currently logged in.
+      // (See notes from 12/17 lecture)
     return userDao.findIdAndName();
   }
 
+  // this gets the transfer amount and userTo from the client so we can handle on the server
   @RequestMapping(path = "/transfer", method = RequestMethod.POST)
     public TransferDTO transfer(@RequestBody TransferDTO transferDTO){
       System.out.println("In transfer " + transferDTO);
+      //JdbcTransferDao.createTransfer(); Where do we call the createTransfer() method?
     return null;
   }
+
+  // trying to add a put method to update all balances if conditions are OK to proceed
+    @RequestMapping(path = "/transfer", method = RequestMethod.PUT)
+    public TransferDTO processTransfer(@RequestBody TransferDTO transferDTO){
+        System.out.println("Here we are!!!");
+        return transferDao.createTransfer(transferDTO);
+    }
+
+
 
 }
