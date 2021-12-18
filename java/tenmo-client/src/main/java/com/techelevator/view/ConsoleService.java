@@ -55,17 +55,18 @@ public class ConsoleService {
 	}
 
 	public String getUserInput(String prompt) {
-		out.print(prompt+": ");
+		out.print(prompt + ": ");
 		out.flush();
-		return in.nextLine();
+		// Do we want to add toLowerCase() here?
+		return in.nextLine().trim();
 	}
 
 	public Long getUserInputLong(String prompt) {
 		Long result = null;
 		do {
-			out.print(prompt+": ");
+			out.print(prompt + ": ");
 			out.flush();
-			String userInput = in.nextLine();
+			String userInput = in.nextLine().trim();
 			try {
 				result = Long.parseLong(userInput);
 			} catch(NumberFormatException e) {
@@ -78,9 +79,9 @@ public class ConsoleService {
 	public BigDecimal getUserInputBigDecimal(String prompt) {
 		BigDecimal result = null;
 		do {
-			out.print(prompt+": ");
+			out.print(prompt + ": ");
 			out.flush();
-			String userInput = in.nextLine();
+			String userInput = in.nextLine().trim();
 			try {
 				result = BigDecimal.valueOf(Long.parseLong(userInput)); // Why????
 			} catch(NumberFormatException e) {
@@ -90,12 +91,23 @@ public class ConsoleService {
 		return result;
 	}
 
+	/*public BigDecimal getUserInputBigDecimal(String prompt) {
+		BigDecimal result = null;
+		do {
+			out.print(prompt + ": ");
+			out.flush();
+			BigDecimal userInput = in.nextBigDecimal();
+			result = userInput;
+		} while(result == null);
+		return result;
+	}*/
+
 	public Integer getUserInputInteger(String prompt) {
 		Integer result = null;
 		do {
-			out.print(prompt+": ");
+			out.print(prompt + ": ");
 			out.flush();
-			String userInput = in.nextLine();
+			String userInput = in.nextLine().trim();
 			try {
 				result = Integer.parseInt(userInput);
 			} catch(NumberFormatException e) {

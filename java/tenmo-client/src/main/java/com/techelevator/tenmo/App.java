@@ -29,7 +29,6 @@ private static final String API_BASE_URL = "http://localhost:8080/";
     private AuthenticatedUser currentUser;
     private ConsoleService console;
     private AuthenticationService authenticationService;
-   // private TenmoService tenmoService = new TenmoService(API_BASE_URL);
 
     public static void main(String[] args) {
     	App app = new App(new ConsoleService(System.in, System.out), new AuthenticationService(API_BASE_URL));
@@ -57,7 +56,6 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 				viewCurrentBalance();
 			} else if(MAIN_MENU_OPTION_VIEW_PAST_TRANSFERS.equals(choice)) {
 				viewTransferHistory();
-
 			} else if(MAIN_MENU_OPTION_VIEW_PENDING_REQUESTS.equals(choice)) {
 				viewPendingRequests();
 			} else if(MAIN_MENU_OPTION_SEND_BUCKS.equals(choice)) {
@@ -74,32 +72,34 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 	}
 
 	private void viewCurrentBalance() {
-		// TODO Auto-generated method stub
 		TenmoService tenmoService = new TenmoService(API_BASE_URL, currentUser.getToken());
 		Account account = tenmoService.getBalance();
 		UserOutput.displayAccountBalance(account);
 	}
 
-	private void viewUsers() { // this is the first step in our Send TE Bucks process
+	private void viewUsers() {
 		TenmoService tenmoService = new TenmoService(API_BASE_URL, currentUser.getToken());
 		User[] users = tenmoService.getUserIdAndName();
 		UserOutput.displayAllUsers(users);
-		//pause();
 	}
 
 	private void viewTransferHistory() {
-		// TODO Auto-generated method stub
 		TenmoService tenmoService = new TenmoService(API_BASE_URL, currentUser.getToken());
 		Transfer[] transfers = tenmoService.viewTransferHistory();
 		UserOutput.displayTransferHistory(transfers);
-		//console.getUserInputInteger("Transfer ID");
 		viewTransferDetail(console.getUserInputInteger("Transfer ID"));
 	}
-	//view Transfer Detail
+
+	// RP added this if statement:
 	private void viewTransferDetail(int id){
     	TenmoService tenmoService = new TenmoService(API_BASE_URL, currentUser.getToken());
     	TransferDetail transferDetail = tenmoService.viewTransferDetail(id);
-    	UserOutput.displayTransferDetails(transferDetail);
+    	if (id == 0) {
+			System.out.println("Returning to main menu.");
+			mainMenu();
+		} else {
+			UserOutput.displayTransferDetails(transferDetail);
+		}
 	}
 
 	private void viewPendingRequests() {
@@ -108,17 +108,11 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 	}
 
 	private void sendBucks() {
-		// TODO Auto-generated method stub
 		TenmoService tenmoService =new TenmoService(API_BASE_URL, currentUser.getToken());
 		viewUsers();
-		//collectUserTransferDetails();
-		// collecting user input of: userFromId, userToId, amount >> TransferDTO model
 		TransferDTO transferDTO = collectUserTransferDetails();
 		tenmoService.transferDTORequest(transferDTO);
-		// some additional tenmoService method
 		tenmoService.processDTORequest(transferDTO);
-		//tenmoService.transferDTORequest(TransferDTO transferDTO);
-
 	}
 
 	private void requestBucks() {
@@ -192,8 +186,5 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 		BigDecimal amount = console.getUserInputBigDecimal("Amount to transfer");
 		return new TransferDTO(userFromId, userToId, amount);
 	}
-	/*private TransferDetail collectTransferId(){
-    	int transferId = console.getUserInputInteger("Transfer ID: ");
-    	return new TransferDetail(transferId);
-	}*/
+
 }

@@ -23,6 +23,10 @@ public class UserOutput {
 
 
     public static void displayTransferHistory(Transfer[] transfers){
+        System.out.println();
+        System.out.println("------------------------------");
+        System.out.println("  *    Transfer History    *  ");
+        System.out.println("------------------------------");
         for (Transfer eachTransfer : transfers) {
             System.out.println(eachTransfer.toString());
         }
@@ -31,7 +35,11 @@ public class UserOutput {
     }
 
     public static void displayTransferDetails(TransferDetail transferDetail){
-        System.out.println("Transfer detail :" + transferDetail.toString());
+        System.out.println();
+        System.out.println("------------------------------");
+        System.out.println("  *    Transfer Details    *  ");
+        System.out.println("------------------------------");
+        System.out.println(transferDetail.toString());
     }
 }
 

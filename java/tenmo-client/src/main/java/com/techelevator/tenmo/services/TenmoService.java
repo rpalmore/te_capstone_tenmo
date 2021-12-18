@@ -32,14 +32,14 @@ public class TenmoService {
 
     }
 
-    public User[] getUserIdAndName(){ // does this need to be same method name?
+    public User[] getUserIdAndName(){
         User[] user = null;
         ResponseEntity<User[]> response = restTemplate.exchange(baseUrl + "users",
                 HttpMethod.GET, makeAuthEntity(), User[].class);
         user = response.getBody();
         return user;
     }
-    //View  transfer History
+
     public Transfer[] viewTransferHistory(){
        Transfer[] transfer = null;
         ResponseEntity<Transfer[]> response = restTemplate.exchange(baseUrl + "transfer",
@@ -48,16 +48,13 @@ public class TenmoService {
         return transfer;
     }
 
-    //View transfer Details
     public TransferDetail viewTransferDetail(int id){
         TransferDetail transferDetail = null;
-        ResponseEntity<TransferDetail> response = restTemplate.exchange(baseUrl + "transfer/" +id,
+        ResponseEntity<TransferDetail> response = restTemplate.exchange(baseUrl + "transfer/" + id,
                 HttpMethod.GET, makeAuthEntity(), TransferDetail.class);
         transferDetail=response.getBody();
         return transferDetail;
     }
-
-
 
 
     public TransferDTO transferDTORequest(TransferDTO transferDTO){
@@ -80,9 +77,7 @@ public class TenmoService {
         return transferDTO;
     }
 
-
-
-        //helper method
+    // helper method
     public HttpEntity<Void> makeAuthEntity(){
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(authToken);
