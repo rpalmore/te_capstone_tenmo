@@ -35,7 +35,7 @@ public class Transfer {
     // Maybe we add a conditional statement to show to/from???
     public String toString() {
         return "ID: " + transferId +
-                ". User: " + username +
-                ". Amount: $" + amount;
+                " | User: " + username +
+                " | Amount: $" + amount;
     }
 }

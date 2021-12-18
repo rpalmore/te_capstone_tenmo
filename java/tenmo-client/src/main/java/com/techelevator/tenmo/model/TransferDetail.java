@@ -7,9 +7,27 @@ public class TransferDetail {
     private int transferId;
     private int transferType;
     private int transferStatus;
-    private int accountFrom;
+    private String userFrom;
+    //private int accountFrom;
     private int accountTo;
+    //private String userTo;
     private BigDecimal amount;
+
+    public String getUserFrom() {
+        return userFrom;
+    }
+
+    public void setUserFrom(String userFrom) {
+        this.userFrom = userFrom;
+    }
+
+    /*public String getUserTo() {
+        return userTo;
+    }
+
+    public void setUserTo(String userTo) {
+        this.userTo = userTo;
+    }*/
 
     public int getTransferId() {
         return transferId;
@@ -35,13 +53,13 @@ public class TransferDetail {
         this.transferStatus = transferStatus;
     }
 
-    public int getAccountFrom() {
+    /*public int getAccountFrom() {
         return accountFrom;
-    }
+    }*/
 
-    public void setAccountFrom(int accountFrom) {
+    /*public void setAccountFrom(int accountFrom) {
         this.accountFrom = accountFrom;
-    }
+    }*/
 
     public int getAccountTo() {
         return accountTo;
@@ -63,10 +81,12 @@ public class TransferDetail {
     @Override
     public String toString() {
         return  "ID: " + transferId + "\n" +
-                "Type: " + transferType + "\n" +
-                "Status: " + transferStatus + "\n" +
-                "From account: " + accountFrom + "\n" +
+                "Type: Send (" + transferType + ")\n" +
+                "Status: Approved (" + transferStatus + ")\n" +
+                "From: " + userFrom + "\n" +
+                //"From account: " + accountFrom + "\n" +
                 "To account: " + accountTo + "\n" +
+                //"To account: " + accountTo + "\n" +
                 "Amount: $" + amount;
     }
 }

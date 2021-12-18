@@ -106,13 +106,14 @@ public class JdbcTransferDao implements TransferDao{
 
         while(results2.next()){
             Transfer transfer = mapRowToTransferHistoryList(results2);
+            transfers.add(transfer);
         }
         return transfers;
     }
     
     public TransferDetail getTransferDetail(int id){
 //Bob to *
-        String sql = "SELECT transfer_id, account_from, account_to, transfer_type_id, transfer_status_id, amount " +
+        String sql = "SELECT transfer_id, username, account_to, transfer_type_id, transfer_status_id, amount " +
                 "FROM transfers JOIN accounts ON accounts.account_id = transfers.account_from " +
                 "JOIN users ON accounts.user_id = users.user_id WHERE transfer_id=?";
 
@@ -123,10 +124,6 @@ public class JdbcTransferDao implements TransferDao{
         }
     return transferDetail;
     }
-    
-    
-
-
 
 
        private TransferDTO mapRowToTransfer(SqlRowSet rs){
@@ -149,8 +146,10 @@ public class JdbcTransferDao implements TransferDao{
         TransferDetail transferDetail = new TransferDetail();
 
         transferDetail.setTransferId(rs.getInt("transfer_id"));
-        transferDetail.setAccountFrom(rs.getInt("account_from"));
+        //transferDetail.setAccountFrom(rs.getInt("account_from"));
+        transferDetail.setUserFrom(rs.getString("username"));
         transferDetail.setAccountTo(rs.getInt("account_to"));
+        //transferDetail.setUserTo("username");
         transferDetail.setTransferType(rs.getInt("transfer_type_id"));
         transferDetail.setTransferStatus(rs.getInt("transfer_status_id"));
         transferDetail.setAmount(rs.getBigDecimal("amount"));
