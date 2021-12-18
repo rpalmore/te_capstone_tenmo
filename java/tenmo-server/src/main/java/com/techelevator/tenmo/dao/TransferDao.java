@@ -10,8 +10,9 @@ public interface TransferDao {
     //boolean createTransfer(TransferDTO transferDTO);
 
     TransferDTO createTransfer(TransferDTO transferDTO);
+
 //Return all transfer history
-    List<Transfer> getTransferHistory();
+    List<Transfer> getTransferHistory(long id);
 
 }
 

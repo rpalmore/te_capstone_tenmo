@@ -86,44 +86,29 @@ public class JdbcTransferDao implements TransferDao{
         return transferDTO;
 }
 
-        /*public List<Transfer> getTransferHistory(){
-        List<Transfer> transfers = new ArrayList<>();
-        String sql = "SELECT transfer_id, username AS From, amount FROM transfers " +
-                "JOIN accounts ON transfers.account_from = accounts.account_id " +
-                "JOIN users ON accounts.user_id = users.user_id " +
-                "WHERE account_to = (SELECT account_id FROM accounts WHERE user_id = 1001)";
-        SqlRowSet results= jdbcTemplate.queryForRowSet(sql);
-        while(results.next()){
-            Transfer transfer = mapRowToTransferHistoryList(results);
-            transfers.add(transfer);
-        }
-                return transfers;
-    }*/
-
-
-    public List<Transfer> getTransferHistory(){
+    public List<Transfer> getTransferHistory(long id){
         List<Transfer> transfers = new ArrayList<>();
         //FROM SOMEONE TO BOB
         String sql = "SELECT transfer_id, username, amount FROM transfers " +
                 "JOIN accounts ON transfers.account_from = accounts.account_id " +
                 "JOIN users ON accounts.user_id = users.user_id " +
-                "WHERE account_to = (SELECT account_id FROM accounts WHERE user_id = 1001)";
-        SqlRowSet results= jdbcTemplate.queryForRowSet(sql);
+                "WHERE account_to = (SELECT account_id FROM accounts WHERE user_id = ?)";
+        SqlRowSet results= jdbcTemplate.queryForRowSet(sql, id);
 
         while(results.next()){
             Transfer transfer = mapRowToTransferHistoryList(results);
             transfers.add(transfer);
         }
-        //FROM BOB to SOMEONE ELSE TO DO
-        String sql2 = "SELECT transfer_id, username, amount FROM transfers " +
-                "JOIN accounts ON transfers.account_from = accounts.account_id " +
-                "JOIN users ON accounts.user_id = users.user_id " +
-                "WHERE account_to = (SELECT account_id FROM accounts WHERE user_id = 1001)";
-        SqlRowSet results2= jdbcTemplate.queryForRowSet(sql2);
+        //FROM BOB to SOMEONE
+        String sql2 = "SELECT transfer_id, username, amount FROM users " +
+                "JOIN accounts ON accounts.user_id = users.user_id JOIN transfers " +
+                "ON transfers.account_to = accounts.account_id WHERE account_from = " +
+                "(SELECT account_id FROM accounts WHERE user_id = ?)";
+
+        SqlRowSet results2= jdbcTemplate.queryForRowSet(sql2, id);
 
         while(results2.next()){
             Transfer transfer = mapRowToTransferHistoryList(results2);
-            transfers.add(transfer);
         }
         return transfers;
     }

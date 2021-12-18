@@ -32,11 +32,10 @@ public class Transfer {
     }
 
     @Override
+    // Maybe we add a conditional statement to show to/from???
     public String toString() {
-        return "Transfer{" +
-                "transferId=" + transferId +
-                ", username='" + username + '\'' +
-                ", amount=" + amount +
-                '}';
+        return "Transfer ID: " + transferId +
+                ". User: " + username +
+                ". Amount: " + amount;
     }
 }

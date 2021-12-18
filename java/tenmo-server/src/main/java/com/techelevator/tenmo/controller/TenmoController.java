@@ -57,8 +57,9 @@ public class TenmoController {
 
     //view Transfer History
     @RequestMapping(path = "/transfer", method = RequestMethod.GET)
-    public List<Transfer> getTransferHistory(){
-         return transferDao.getTransferHistory();
+    public List<Transfer> getTransferHistory(Principal principal){
+         long id = userDao.findIdByUsername(principal.getName());
+         return transferDao.getTransferHistory(id);
     }
 
 
