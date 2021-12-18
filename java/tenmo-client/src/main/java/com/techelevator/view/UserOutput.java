@@ -2,7 +2,10 @@ package com.techelevator.view;
 
 import com.techelevator.tenmo.model.Account;
 import com.techelevator.tenmo.model.Transfer;
+import com.techelevator.tenmo.model.TransferDetail;
 import com.techelevator.tenmo.model.User;
+
+import java.sql.SQLOutput;
 
 public class UserOutput {
     public static void displayAccountBalance(Account account){
@@ -25,6 +28,10 @@ public class UserOutput {
         }
         System.out.println();
         System.out.println("Please enter transfer ID to view details (0 to cancel):");
+    }
+
+    public static void displayTransferDetails(TransferDetail transferDetail){
+        System.out.println("Transfer detail :" + transferDetail.toString());
     }
 }
 

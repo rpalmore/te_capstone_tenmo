@@ -3,10 +3,7 @@ package com.techelevator.tenmo.controller;
 import com.techelevator.tenmo.dao.AccountDao;
 import com.techelevator.tenmo.dao.TransferDao;
 import com.techelevator.tenmo.dao.UserDao;
-import com.techelevator.tenmo.model.Account;
-import com.techelevator.tenmo.model.Transfer;
-import com.techelevator.tenmo.model.TransferDTO;
-import com.techelevator.tenmo.model.User;
+import com.techelevator.tenmo.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -62,5 +59,18 @@ public class TenmoController {
          return transferDao.getTransferHistory(id);
     }
 
+    //view Transfer Detail
+    @RequestMapping(path= "/transfer/{id}", method= RequestMethod.GET)
+    public TransferDetail getTransferDetailById(@PathVariable int id){
+        return transferDao.getTransferDetail(id);
+    }
+
+
+
+    /*  @GetMapping("/pokemonDetail/{id}")
+    public PokemonDetail getPokemonDetailById(@PathVariable int id){
+        return service.getPokemonDetailById(id);
+    }
+    * */
 
 }

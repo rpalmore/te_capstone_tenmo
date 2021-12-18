@@ -1,9 +1,6 @@
 package com.techelevator.tenmo.dao;
 
-import com.techelevator.tenmo.model.Account;
-import com.techelevator.tenmo.model.Transfer;
-import com.techelevator.tenmo.model.TransferDTO;
-import com.techelevator.tenmo.model.User;
+import com.techelevator.tenmo.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -112,6 +109,22 @@ public class JdbcTransferDao implements TransferDao{
         }
         return transfers;
     }
+    
+    public TransferDetail getTransferDetail(int id){
+//Bob to *
+        String sql = "SELECT transfer_id, account_from, account_to, transfer_type_id, transfer_status_id, amount " +
+                "FROM transfers JOIN accounts ON accounts.account_id = transfers.account_from " +
+                "JOIN users ON accounts.user_id = users.user_id WHERE transfer_id=?";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+        TransferDetail transferDetail = new TransferDetail();
+        while(results.next()){
+            transferDetail = mapRowToTransferDetail(results);
+        }
+    return transferDetail;
+    }
+    
+    
 
 
 
@@ -130,6 +143,19 @@ public class JdbcTransferDao implements TransferDao{
         transfer.setUsername(rs.getString("username"));
         transfer.setAmount(rs.getBigDecimal("amount"));
         return transfer;
+        }
+
+        private TransferDetail mapRowToTransferDetail(SqlRowSet rs){
+        TransferDetail transferDetail = new TransferDetail();
+
+        transferDetail.setTransferId(rs.getInt("transfer_id"));
+        transferDetail.setAccountFrom(rs.getInt("account_from"));
+        transferDetail.setAccountTo(rs.getInt("account_to"));
+        transferDetail.setTransferType(rs.getInt("transfer_type_id"));
+        transferDetail.setTransferStatus(rs.getInt("transfer_status_id"));
+        transferDetail.setAmount(rs.getBigDecimal("amount"));
+
+        return transferDetail;
         }
 
 }

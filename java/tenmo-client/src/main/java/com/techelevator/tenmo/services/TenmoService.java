@@ -1,10 +1,7 @@
 package com.techelevator.tenmo.services;
 
 
-import com.techelevator.tenmo.model.Account;
-import com.techelevator.tenmo.model.Transfer;
-import com.techelevator.tenmo.model.TransferDTO;
-import com.techelevator.tenmo.model.User;
+import com.techelevator.tenmo.model.*;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -51,6 +48,14 @@ public class TenmoService {
         return transfer;
     }
 
+    //View transfer Details
+    public TransferDetail viewTransferDetail(int id){
+        TransferDetail transferDetail = null;
+        ResponseEntity<TransferDetail> response = restTemplate.exchange(baseUrl + "transfer/" +id,
+                HttpMethod.GET, makeAuthEntity(), TransferDetail.class);
+        transferDetail=response.getBody();
+        return transferDetail;
+    }
 
 
 
@@ -74,18 +79,7 @@ public class TenmoService {
 
         return transferDTO;
     }
-    // Example code:
-  /*  public Review[] listReviews() {
-        return restTemplate.getForObject(API_BASE_URL + "reviews", Review[].class);
-    }
 
-    public Hotel getHotelById(int id) {
-        return restTemplate.getForObject(API_BASE_URL + "hotels/" + id, Hotel.class);
-    }
-
-    public Review[] getReviewsByHotelId(int hotelID) {
-        return restTemplate.getForObject(API_BASE_URL + "hotels/" + hotelID + "/reviews", Review[].class);
-*/
 
 
         //helper method
