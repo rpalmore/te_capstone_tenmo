@@ -7,6 +7,15 @@ public class Transfer {
     private String username;
     private BigDecimal amount;
 
+    public Transfer(int transferId, String username, BigDecimal amount) {
+        this.transferId = transferId;
+        this.username = username;
+        this.amount = amount;
+    }
+
+    public Transfer() {
+    }
+
     public int getTransferId() {
         return transferId;
     }
