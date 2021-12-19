@@ -18,13 +18,7 @@ public class JdbcAccountDaoTest extends BaseDaoTests {
     private JdbcAccountDao sut;
     private Account testAccount;
 
-    /*public JdbcAccountDao(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }*/
 
-  /* public JdbcAccountDao(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }*/
     @Before
     public void setup(){
         sut = new JdbcAccountDao(dataSource);
@@ -59,20 +53,3 @@ public class JdbcAccountDaoTest extends BaseDaoTests {
         Assert.assertEquals(expected.getBalance(), actual.getBalance());
     }
 }
-//////////////////////////////////////////Sample below
-    /*public void getPark_returns_correct_park_for_id() {
-        Park actual = sut.getPark(1);  // call the dao method getPark for the id of 1
-        assertParksMatch(PARK_1, actual);
-
-        actual = sut.getPark(3);  // call the dao method getPark with the id 3
-        assertParksMatch(PARK_3, actual);
-    }
-
-
-    private void assertParksMatch(Park expected, Park actual) {
-        Assert.assertEquals(expected.getParkId(), actual.getParkId());
-        Assert.assertEquals(expected.getParkName(), actual.getParkName());
-        Assert.assertEquals(expected.getDateEstablished(), actual.getDateEstablished());
-        Assert.assertEquals(expected.getArea(), actual.getArea(), 0.1);
-        Assert.assertEquals(expected.getHasCamping(), actual.getHasCamping());
-    }*/

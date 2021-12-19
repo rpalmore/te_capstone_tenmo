@@ -41,7 +41,6 @@ public class Transfer {
     }
 
     @Override
-    // Changes to this toString() method output do not display on client side.
     public String toString() {
         return "Transfer{" +
                 "transferId!=" + transferId +

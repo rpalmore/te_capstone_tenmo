@@ -16,28 +16,16 @@ import java.util.List;
 public class JdbcTransferDao implements TransferDao{
     private JdbcTemplate jdbcTemplate;
 
-   /* public JdbcTransferDao(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }*/
-   public JdbcTransferDao(DataSource dataSource){
+    // Changes here to introduce dataSource for integration testing attempt.
+    public JdbcTransferDao(DataSource dataSource){
        this.jdbcTemplate = new JdbcTemplate(dataSource);
-   }
-
-    // When dealing with models, we need a default constructor.
-    // Here, we don't need a default constructor.
-
-/* @Autowired
-    private AccountDao accountDao;*/
+    }
 
     @Autowired
     private UserDao userDao;
 
-    /*@Autowired
-    private TransferDao transferDao;*/
-
     @Override
     public TransferDTO createTransfer(TransferDTO transferDTO) {
-      //public boolean createTransfer(TransferDTO transferDTO){
 
          String sql = "SELECT balance FROM accounts WHERE user_id = ?";
 
@@ -45,38 +33,34 @@ public class JdbcTransferDao implements TransferDao{
          results.next();
          BigDecimal balance = (results.getBigDecimal("balance"));
 
-        // Setting up compareTo method for BigDecimal:
         int res = transferDTO.getAmount().compareTo(balance);
 
         boolean enoughFunds = true;
 
         // To make the transfer, we need to have 0 or -1;
         if (res == 0) {
-            //System.out.println("Both values are equal.");
             enoughFunds = true;
         } else if (res == 1) {
             enoughFunds = false;
-            // we will throw exception here
-            //System.out.println("First value is greater.");
+            System.out.println("You do not have enough funds for this transfer.");
         } else if (res == -1) {
             enoughFunds = true;
-            //System.out.println("Second value is greater.");
         }
 
         if (enoughFunds) {
-            // withdraw amount from account of current user:
+            // Withdraw funds from user account
             BigDecimal newBalanceWithdraw = balance.subtract(transferDTO.getAmount());
             String sql2 = "UPDATE accounts SET balance = ? " +
                     "WHERE user_id = ?";
             jdbcTemplate.update(sql2, newBalanceWithdraw, transferDTO.getUserFromId());
 
-            // add transfer amount to toUser account:
+            // Add funds to recipient's account
             BigDecimal updatedBalanceDeposit = balance.add(transferDTO.getAmount());
             String sql3 = "UPDATE accounts SET balance = ? " +
                     "WHERE user_id = ?";
             jdbcTemplate.update(sql3, updatedBalanceDeposit, transferDTO.getUserToId());
 
-            // write the transfer details to the transfers table:
+            // Write transfer details to transfers table
             String sql4 = "INSERT INTO transfers (transfer_type_id, transfer_status_id, account_from, account_to, amount) " +
                     "VALUES(2, 2, (SELECT account_id FROM accounts WHERE user_id = ?), " +
                                  "(SELECT account_id FROM accounts WHERE user_id = ?), ?)";
@@ -151,14 +135,12 @@ public class JdbcTransferDao implements TransferDao{
 
         private TransferDetail mapRowToTransferDetail(SqlRowSet rs){
         TransferDetail transferDetail = new TransferDetail();
-
         transferDetail.setTransferId(rs.getInt("transfer_id"));
         transferDetail.setUserFrom(rs.getString("userFrom"));
         transferDetail.setUserTo(rs.getString("userTo"));
         transferDetail.setTransferType(rs.getInt("transfer_type_id"));
         transferDetail.setTransferStatus(rs.getInt("transfer_status_id"));
         transferDetail.setAmount(rs.getBigDecimal("amount"));
-
         return transferDetail;
         }
 

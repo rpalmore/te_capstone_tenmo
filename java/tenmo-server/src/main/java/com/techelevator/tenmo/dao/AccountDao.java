@@ -8,6 +8,4 @@ public interface AccountDao {
 
     Account getAccount(long id);
 
-
-
 }

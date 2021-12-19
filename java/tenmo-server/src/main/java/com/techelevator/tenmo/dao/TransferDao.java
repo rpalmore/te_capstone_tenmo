@@ -8,15 +8,10 @@ import java.util.List;
 
 public interface TransferDao {
 
-    //boolean createTransfer(TransferDTO transferDTO);
-
     TransferDTO createTransfer(TransferDTO transferDTO);
 
-//Return all transfer history
     List<Transfer> getTransferHistory(long id);
 
-
-    //Return transfer detail
     TransferDetail getTransferDetail(int id);
 }
 

@@ -8,14 +8,12 @@ public class TransferDTO {
         private long userToId;
         private BigDecimal amount;
 
-        // adding constructor for test method -- but can remove if this breaks code
         public TransferDTO(long userFromId, long userToId, BigDecimal amount) {
                 this.userFromId = userFromId;
                 this.userToId = userToId;
                 this.amount = amount;
         }
 
-        // adding empty constructor for testing -- will remove if it breaks code
         public TransferDTO() {
         }
 
