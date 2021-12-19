@@ -31,10 +31,11 @@ public class TenmoController {
   }
 
   @RequestMapping(path = "/users", method = RequestMethod.GET)
-    public List<User> getUserIdAndName(){
+    public List<User> getUserIdAndName(Principal principal){
     // TO DO: limit results to users not currently logged in.
       // (See notes from 12/17 lecture)
-    return userDao.findIdAndName();
+      long id = userDao.findIdByUsername(principal.getName());
+      return userDao.findIdAndName(id);
   }
 
 

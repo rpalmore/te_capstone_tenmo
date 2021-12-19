@@ -9,10 +9,6 @@ import java.sql.SQLOutput;
 
 public class UserOutput {
 
-    //private AuthenticatedUser currentUser;
-
-
-
     public static void displayAccountBalance(Account account){
 
         System.out.println("Current balance: $" + account.getBalance());
@@ -20,10 +16,6 @@ public class UserOutput {
 
 
     public static void displayAllUsers(User[] user) {
-        //Need to remove current user
-        // TenmoService tenmoService = new TenmoService();
-        // Principal principal = null;
-
         for (User eachUser : user) {
             System.out.println(eachUser.toString());
         }
