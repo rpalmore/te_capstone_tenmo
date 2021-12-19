@@ -112,10 +112,13 @@ public class JdbcTransferDao implements TransferDao{
     }
     
     public TransferDetail getTransferDetail(int id){
-//Bob to *
-        String sql = "SELECT transfer_id, username, account_to, transfer_type_id, transfer_status_id, amount " +
-                "FROM transfers JOIN accounts ON accounts.account_id = transfers.account_from " +
-                "JOIN users ON accounts.user_id = users.user_id WHERE transfer_id=?";
+
+        String sql =
+                "SELECT transfer_id, users.username as userFrom, us.username as userTo, transfer_type_id, transfer_status_id, amount " +
+                "FROM transfers JOIN accounts ON transfers.account_from = accounts.account_id " +
+                "JOIN accounts ac ON transfers.account_to = ac.account_id " +
+                "JOIN users ON ac.user_id = users.user_id " +
+                "JOIN users us ON accounts.user_id = us.user_id WHERE transfer_id = ?";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
         TransferDetail transferDetail = new TransferDetail();
@@ -146,10 +149,8 @@ public class JdbcTransferDao implements TransferDao{
         TransferDetail transferDetail = new TransferDetail();
 
         transferDetail.setTransferId(rs.getInt("transfer_id"));
-        //transferDetail.setAccountFrom(rs.getInt("account_from"));
-        transferDetail.setUserFrom(rs.getString("username"));
-        transferDetail.setAccountTo(rs.getInt("account_to"));
-        //transferDetail.setUserTo("username");
+        transferDetail.setUserFrom(rs.getString("userFrom"));
+        transferDetail.setUserTo(rs.getString("userTo"));
         transferDetail.setTransferType(rs.getInt("transfer_type_id"));
         transferDetail.setTransferStatus(rs.getInt("transfer_status_id"));
         transferDetail.setAmount(rs.getBigDecimal("amount"));
@@ -158,13 +159,5 @@ public class JdbcTransferDao implements TransferDao{
         }
 
 }
-
-
-/* JdbcTransferDao method
-1. check to see if userFrom has enough money
-2.if so withdraw from userFrom account
-3.add to userTo amount
-4.write to transfer table in the db --create
- */
 
 

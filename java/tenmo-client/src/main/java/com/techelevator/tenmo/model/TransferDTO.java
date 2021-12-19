@@ -11,7 +11,6 @@ public class TransferDTO {
     private BigDecimal amount;
 
 
-
     public TransferDTO(long userFromId, long userToId, BigDecimal amount) {
         this.userFromId = userFromId;
         this.userToId = userToId;
