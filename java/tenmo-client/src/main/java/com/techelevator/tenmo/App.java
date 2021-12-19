@@ -107,7 +107,7 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 	}
 
 	private void sendBucks() {
-		TenmoService tenmoService =new TenmoService(API_BASE_URL, currentUser.getToken());
+		TenmoService tenmoService = new TenmoService(API_BASE_URL, currentUser.getToken());
 		viewUsers();
 		TransferDTO transferDTO = collectUserTransferDetails();
 		tenmoService.transferDTORequest(transferDTO);

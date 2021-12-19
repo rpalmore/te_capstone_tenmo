@@ -1,16 +1,11 @@
 package com.techelevator.tenmo.services;
 
-
 import com.techelevator.tenmo.model.*;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-
-import java.math.BigDecimal;
-import java.util.Map;
-
 
 public class TenmoService {
 
@@ -25,11 +20,10 @@ public class TenmoService {
 
     public Account getBalance(){
         Account account = null;
-       ResponseEntity<Account> response = restTemplate.exchange(baseUrl + "balance",
+        ResponseEntity<Account> response = restTemplate.exchange(baseUrl + "balance",
                HttpMethod.GET, makeAuthEntity(), Account.class);
-       account = response.getBody();
-       return account;
-
+        account = response.getBody();
+        return account;
     }
 
     public User[] getUserIdAndName(){
@@ -62,7 +56,7 @@ public class TenmoService {
         headers.setBearerAuth(authToken);
 
         HttpEntity<TransferDTO> entity = new HttpEntity<>(transferDTO, headers);
-         transferDTO= restTemplate.postForObject(baseUrl+ "transfer",
+        transferDTO= restTemplate.postForObject(baseUrl+ "transfer",
                 entity,TransferDTO.class);
         return transferDTO;
     }
@@ -81,7 +75,7 @@ public class TenmoService {
     public HttpEntity<Void> makeAuthEntity(){
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(authToken);
-        return  new HttpEntity<>(headers);
+        return new HttpEntity<>(headers);
     }
 
 }
