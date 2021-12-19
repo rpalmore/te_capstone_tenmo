@@ -1,24 +1,33 @@
 package com.techelevator.view;
 
-import com.techelevator.tenmo.model.Account;
-import com.techelevator.tenmo.model.Transfer;
-import com.techelevator.tenmo.model.TransferDetail;
-import com.techelevator.tenmo.model.User;
+import com.techelevator.tenmo.model.*;
+import com.techelevator.tenmo.services.TenmoService;
 
+import java.security.Principal;
 import java.sql.SQLOutput;
 
+
 public class UserOutput {
+
+    private AuthenticatedUser currentUser;
+
+
+
     public static void displayAccountBalance(Account account){
 
         System.out.println("Current balance: $" + account.getBalance());
     }
 
-    public static void displayAllUsers(User[] user){
-            for (User eachUser : user) {
-                System.out.println(eachUser.toString());
-            }
-        System.out.println();
-        System.out.println("Enter ID of the user you wish to send money to. ");
+
+    public static void displayAllUsers(User[] user) {
+//Need to remove current user
+        // TenmoService tenmoService = new TenmoService();
+        // Principal principal = null;
+        for (User eachUser : user) {
+            System.out.println(eachUser.toString());
+        }
+            System.out.println();
+            System.out.println("Enter ID of the user you wish to send money to. ");
         }
 
 

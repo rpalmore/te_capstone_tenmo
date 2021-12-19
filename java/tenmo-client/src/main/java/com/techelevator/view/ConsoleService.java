@@ -82,25 +82,13 @@ public class ConsoleService {
 			out.flush();
 			String userInput = in.nextLine().trim();
 			try {
-				result = BigDecimal.valueOf(Long.parseLong(userInput)); // Why????
+				result= new BigDecimal(userInput);
 			} catch(NumberFormatException e) {
 				out.println(System.lineSeparator() + "*** " + userInput + " is not valid ***" + System.lineSeparator());
 			}
 		} while(result == null);
 		return result;
 	}
-
-	/*public BigDecimal getUserInputBigDecimal(String prompt) {
-		BigDecimal result = null;
-		do {
-			out.print(prompt + ": ");
-			out.flush();
-			BigDecimal userInput = in.nextBigDecimal();
-			result = userInput;
-		} while(result == null);
-		return result;
-	}*/
-
 	public Integer getUserInputInteger(String prompt) {
 		Integer result = null;
 		do {
