@@ -90,7 +90,6 @@ private static final String API_BASE_URL = "http://localhost:8080/";
 		viewTransferDetail(console.getUserInputInteger("Transfer ID"));
 	}
 
-	// RP added this if statement:
 	private void viewTransferDetail(int id){
     	TenmoService tenmoService = new TenmoService(API_BASE_URL, currentUser.getToken());
     	TransferDetail transferDetail = tenmoService.viewTransferDetail(id);

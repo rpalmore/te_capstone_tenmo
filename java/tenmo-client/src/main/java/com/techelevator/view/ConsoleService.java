@@ -57,7 +57,6 @@ public class ConsoleService {
 	public String getUserInput(String prompt) {
 		out.print(prompt + ": ");
 		out.flush();
-		// Do we want to add toLowerCase() here?
 		return in.nextLine().trim();
 	}
 
