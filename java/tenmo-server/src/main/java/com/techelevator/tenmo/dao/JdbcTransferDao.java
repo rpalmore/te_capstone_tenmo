@@ -114,7 +114,7 @@ public class JdbcTransferDao implements TransferDao{
     public TransferDetail getTransferDetail(int id){
 
         String sql =
-                "SELECT transfer_id, users.username as userFrom, us.username as userTo, transfer_type_id, transfer_status_id, amount " +
+                "SELECT transfer_id, us.username as userFrom, users.username as userTo, transfer_type_id, transfer_status_id, amount " +
                 "FROM transfers JOIN accounts ON transfers.account_from = accounts.account_id " +
                 "JOIN accounts ac ON transfers.account_to = ac.account_id " +
                 "JOIN users ON ac.user_id = users.user_id " +
