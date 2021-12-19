@@ -6,6 +6,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 import java.math.BigDecimal;
 
 @Component
@@ -13,9 +14,17 @@ public class JdbcAccountDao implements  AccountDao{
 
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcAccountDao(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    //public JdbcAccountDao(JdbcTemplate jdbcTemplate) {
+   /*     this.jdbcTemplate = jdbcTemplate;
+    }*/
+    public JdbcAccountDao(DataSource dataSource){
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
+    /*private final JdbcTemplate jdbcTemplate;
+
+    public JdbcParkDao(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }*/
 
 
     @Override
