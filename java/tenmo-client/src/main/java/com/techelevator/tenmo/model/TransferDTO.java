@@ -47,9 +47,9 @@ public class TransferDTO {
     @Override
     public String toString() {
         return "TransferDTO{" +
-                "userFromId=" + userFromId +
-                ", userToId=" + userToId +
-                ", amount=" + amount +
+                "userFromId: " + userFromId +
+                ", userToId: " + userToId +
+                ", amount: " + amount +
                 '}';
     }
 }

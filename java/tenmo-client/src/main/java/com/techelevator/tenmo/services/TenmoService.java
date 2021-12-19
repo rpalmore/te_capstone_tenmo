@@ -64,10 +64,8 @@ public class TenmoService {
     public TransferDTO processDTORequest(TransferDTO transferDTO){
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(authToken);
-
         HttpEntity<TransferDTO> entity = new HttpEntity<>(transferDTO, headers);
         restTemplate.put(baseUrl + "transfer", entity, TransferDTO.class);
-
         return transferDTO;
     }
 

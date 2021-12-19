@@ -4,8 +4,25 @@ import java.math.BigDecimal;
 
 public class Transfer {
     private int transferId;
-    private String username;
+    private String userFrom;
+    private String userTo;
     private BigDecimal amount;
+
+    public String getUserFrom() {
+        return userFrom;
+    }
+
+    public void setUserFrom(String userFrom) {
+        this.userFrom = userFrom;
+    }
+
+    public String getUserTo() {
+        return userTo;
+    }
+
+    public void setUserTo(String userTo) {
+        this.userTo = userTo;
+    }
 
     public int getTransferId() {
         return transferId;
@@ -13,14 +30,6 @@ public class Transfer {
 
     public void setTransferId(int transferId) {
         this.transferId = transferId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public BigDecimal getAmount() {
@@ -32,10 +41,10 @@ public class Transfer {
     }
 
     @Override
-    // Maybe we add a conditional statement to show to/from???
     public String toString() {
-        return "ID: " + transferId +
-                " | User: " + username +
+        return "Transfer ID: " + transferId +
+                " >> FROM: " + userFrom +
+                ". TO: " + userTo +
                 " | Amount: $" + amount;
     }
 }

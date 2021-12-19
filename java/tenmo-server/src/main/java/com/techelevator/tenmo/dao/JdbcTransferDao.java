@@ -42,7 +42,8 @@ public class JdbcTransferDao implements TransferDao{
             enoughFunds = true;
         } else if (res == 1) {
             enoughFunds = false;
-            System.out.println("You do not have enough funds for this transfer.");
+            System.out.println("User does not have enough funds for this transfer.");
+
         } else if (res == -1) {
             enoughFunds = true;
         }
@@ -73,27 +74,19 @@ public class JdbcTransferDao implements TransferDao{
 
     public List<Transfer> getTransferHistory(long id){
         List<Transfer> transfers = new ArrayList<>();
-        //FROM SOMEONE TO BOB
-        String sql = "SELECT transfer_id, username, amount FROM transfers " +
-                "JOIN accounts ON transfers.account_from = accounts.account_id " +
-                "JOIN users ON accounts.user_id = users.user_id " +
-                "WHERE account_to = (SELECT account_id FROM accounts WHERE user_id = ?)";
-        SqlRowSet results= jdbcTemplate.queryForRowSet(sql, id);
+
+        String sql =
+                "SELECT transfer_id, users.username as userFrom, us.username as userTo, amount " +
+                        "FROM transfers JOIN accounts ON transfers.account_from = accounts.account_id " +
+                        "JOIN accounts ac ON transfers.account_to = ac.account_id " +
+                        "JOIN users ON ac.user_id = users.user_id " +
+                        "JOIN users us ON accounts.user_id = us.user_id " +
+                        "WHERE users.user_id = ? OR us.user_id = ?";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id, id);
 
         while(results.next()){
             Transfer transfer = mapRowToTransferHistoryList(results);
-            transfers.add(transfer);
-        }
-        //FROM BOB to SOMEONE
-        String sql2 = "SELECT transfer_id, username, amount FROM users " +
-                "JOIN accounts ON accounts.user_id = users.user_id JOIN transfers " +
-                "ON transfers.account_to = accounts.account_id WHERE account_from = " +
-                "(SELECT account_id FROM accounts WHERE user_id = ?)";
-
-        SqlRowSet results2= jdbcTemplate.queryForRowSet(sql2, id);
-
-        while(results2.next()){
-            Transfer transfer = mapRowToTransferHistoryList(results2);
             transfers.add(transfer);
         }
         return transfers;
@@ -128,7 +121,8 @@ public class JdbcTransferDao implements TransferDao{
         private Transfer mapRowToTransferHistoryList(SqlRowSet rs){
         Transfer transfer = new Transfer();
         transfer.setTransferId(rs.getInt("transfer_id"));
-        transfer.setUsername(rs.getString("username"));
+        transfer.setUserFrom(rs.getString("userFrom"));
+        transfer.setUserTo(rs.getString("userTo"));
         transfer.setAmount(rs.getBigDecimal("amount"));
         return transfer;
         }

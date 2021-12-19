@@ -4,16 +4,24 @@ import java.math.BigDecimal;
 
 public class Transfer {
     private int transferId;
-    private String username;
+    private String userFrom;
+    private String userTo;
     private BigDecimal amount;
 
-    public Transfer(int transferId, String username, BigDecimal amount) {
-        this.transferId = transferId;
-        this.username = username;
-        this.amount = amount;
+    public String getUserFrom() {
+        return userFrom;
     }
 
-    public Transfer() {
+    public void setUserFrom(String userFrom) {
+        this.userFrom = userFrom;
+    }
+
+    public String getUserTo() {
+        return userTo;
+    }
+
+    public void setUserTo(String userTo) {
+        this.userTo = userTo;
     }
 
     public int getTransferId() {
@@ -22,14 +30,6 @@ public class Transfer {
 
     public void setTransferId(int transferId) {
         this.transferId = transferId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public BigDecimal getAmount() {
@@ -42,10 +42,9 @@ public class Transfer {
 
     @Override
     public String toString() {
-        return "Transfer{" +
-                "transferId!=" + transferId +
-                ", username='" + username + '\'' +
-                ", amount=" + amount +
-                '}';
+        return "ID: " + transferId +
+                " | User: " + userFrom +
+                " | To: " + userTo +
+                " | Amount: $" + amount;
     }
 }

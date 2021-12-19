@@ -29,6 +29,7 @@ public class UserOutput {
         System.out.println("------------------------------");
         System.out.println("  *    Transfer History    *  ");
         System.out.println("------------------------------");
+
         for (Transfer eachTransfer : transfers) {
             System.out.println(eachTransfer.toString());
         }
