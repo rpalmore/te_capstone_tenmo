@@ -17,7 +17,7 @@ SELECT transfer_id, account_from AS from, account_to AS To, amount, username
         OR account_to = (SELECT account_id FROM accounts WHERE user_id = 1001);
         
 -- Can this replace our double SQL statements?        
-SELECT transfer_id, amount, users.username AS from, us.username AS to
+SELECT transfer_id, users.username AS from, us.username AS to, amount
         FROM transfers
         JOIN accounts ON transfers.account_from = accounts.account_id
         JOIN accounts ac ON transfers.account_to = ac.account_id
@@ -26,7 +26,7 @@ SELECT transfer_id, amount, users.username AS from, us.username AS to
         WHERE users.user_id = 1002 OR us.user_id = 1002;
         
 -- Yes! Here is a one-line version
-SELECT transfer_id, amount, users.username AS from, us.username AS to FROM transfers JOIN accounts ON transfers.account_from = accounts.account_id JOIN accounts ac ON transfers.account_to = ac.account_id JOIN users ON ac.user_id = users.user_id JOIN users us ON accounts.user_id = us.user_id WHERE users.user_id = 1002 OR us.user_id = 1002;
+SELECT transfer_id, users.username AS from, us.username AS to, amount FROM transfers JOIN accounts ON transfers.account_from = accounts.account_id JOIN accounts ac ON transfers.account_to = ac.account_id JOIN users ON ac.user_id = users.user_id JOIN users us ON accounts.user_id = us.user_id WHERE users.user_id = 1002 OR us.user_id = 1002;
         
 --THIS DISPLAYS TWO USERNAMES!!!!!        
 SELECT transfer_id, amount, users.username AS from, us.username AS to
