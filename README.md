@@ -8,4 +8,4 @@ For full details about this assignment, please review the TEnmo project readme h
 
 There is of course still work to be done here and I plan to keep chipping away at it. 
 
-A big thanks to my coding partner Odgerel and the awewome instructors Margaret Green, Gregor Dzierzon, Andy Chong Sam and Joshua Mack for their support.
+A big thanks to my coding partner Odgerel and the awesome instructors Margaret Green, Gregor Dzierzon, Andy Chong Sam and Joshua Mack for their support.
