@@ -14,11 +14,9 @@ public class JdbcAccountDao implements  AccountDao{
 
     private JdbcTemplate jdbcTemplate;
 
-    // Changes here to introduce dataSource for integration testing attempt.
-    public JdbcAccountDao(DataSource dataSource){
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    public JdbcAccountDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
-
 
     @Override
     public Account getAccount(long id) {

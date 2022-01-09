@@ -16,9 +16,8 @@ import java.util.List;
 public class JdbcTransferDao implements TransferDao{
     private JdbcTemplate jdbcTemplate;
 
-    // Changes here to introduce dataSource for integration testing attempt.
-    public JdbcTransferDao(DataSource dataSource){
-       this.jdbcTemplate = new JdbcTemplate(dataSource);
+    public JdbcTransferDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Autowired
