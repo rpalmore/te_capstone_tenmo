@@ -2,7 +2,7 @@
 
 I worked on this Tech Elevator project with fellow student Odgerel Jamsranjav over the course of five days. We were tasked with writing a RESTful API server and command-line application as part of our 14-week Java bootcamp. Tech Elevator provided some starting code -- including all of the login and register functionality.
 
-This project marked the end of our second module. You can learn more about Tech Elevator's coding bootcamps here: https://www.techelevator.com/.
+This capstone marked the end of our second module. You can learn more about Tech Elevator's coding bootcamps here: https://www.techelevator.com/.
 
 For full details about this assignment, please review the TEnmo project readme here: https://github.com/rpalmore/te_capstone_tenmo/blob/main/java/README.md
 
